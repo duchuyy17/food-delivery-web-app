@@ -27,7 +27,7 @@ const useEnvVars = (env = Updates.channel) => {
       GOOGLE_PACES_API_BASE_URL: configuration?.googlePlacesApiBaseUrl
     }
   }
-
+//dsadsa
   return {
     // GRAPHQL_URL: 'http://192.168.18.107:8001/graphql',
     // WS_GRAPHQL_URL: 'ws://192.168.18.107:8001/graphql',
