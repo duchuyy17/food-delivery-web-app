@@ -55,7 +55,7 @@ const styles = (props = null) =>
       paddingVertical: scale(5),
       paddingHorizontal: scale(15),
       minWidth: '45%',
-      alignItems: 'center',
+      alignItems: 'left',
       shadowColor: '#000',
       shadowOffset: {
         width: 0,

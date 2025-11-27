@@ -74,11 +74,11 @@ const styles = (props = null) =>
       alignItems: props?.isRTL ? 'flex-end' : 'flex-start'
     },
     subDetailsContainer: {
-      backgroundColor: props != null ? props.themeBackground : 'white',
+      backgroundColor: props != null ? props.gray10 : 'white',
       width: '45%',
-      alignItems: 'center',
+      alignItems: 'left',
       borderRadius: scale(50),
-      padding: scale(5),
+      padding: scale(6),
       marginVertical: scale(3),
     },
     subContainer: {

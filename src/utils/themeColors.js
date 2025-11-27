@@ -128,7 +128,8 @@ export const theme = {
     customBorder: '#E5E7EB',
     radiusBorder: '#fe0000',
     radiusFill: 'rgba(0, 255, 0, 0.2)',
-    toggler:"#fff"
+    toggler:"#fff",
+    gray10: '#f7f7f7ff'
   },
   Dark: {
     toggler:"#000",

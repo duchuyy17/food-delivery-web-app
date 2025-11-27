@@ -260,7 +260,7 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-    <AnimatedSplashScreen>
+    <AnimatedSplashScreen enabled={false}>
       <ApolloProvider client={client}>
         <ThemeContext.Provider
           // use default theme

@@ -381,7 +381,7 @@ function ImageTextCenterHeader(props, ref) {
                     H5
                     isRTL
                   >
-                    {aboutObject?.average}
+                    {aboutObject?.average ?? 0}
                   </TextDefault>
                   <TextDefault
                     textColor={currentTheme.fontNewColor}
@@ -389,7 +389,7 @@ function ImageTextCenterHeader(props, ref) {
                     H5
                     isRTL
                   >
-                    {aboutObject?.reviewsCount ?? 0} review(s)
+                    ({aboutObject?.reviewsCount ?? 0} {t('Reviews')})
                   </TextDefault>
                 </AnimatedTouchable>
                 <AnimatedTouchable
@@ -418,11 +418,11 @@ function ImageTextCenterHeader(props, ref) {
               >
                 <View
                   activeOpacity={0.7}
-                  style={styles(currentTheme).ratingBox}
+                  style= {styles(currentTheme).ratingBox }
                 >
                   <MaterialCommunityIcons
                     name='timer-outline'
-                    size={scale(20)}
+                    size={scale(23)}
                     color={currentTheme.newIconColor}
                   />
 
@@ -468,10 +468,10 @@ function ImageTextCenterHeader(props, ref) {
               <View
                 style={[
                   styles(currentTheme).ratingBox,
-                  { marginTop: scale(5) }
+                  { marginTop: scale(8) }
                 ]}
               >
-                <Bicycle size={20} color={currentTheme.newFontcolor} />
+                <Bicycle size={24} color={currentTheme.newFontcolor} />
 
                 <TextDefault
                   textColor={currentTheme.fontNewColor}

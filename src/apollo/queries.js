@@ -711,6 +711,7 @@ export const restaurant = `query Restaurant($id:String){
     image
     logo
     address
+    shopType
     location{coordinates}
     deliveryTime
     minimumOrder

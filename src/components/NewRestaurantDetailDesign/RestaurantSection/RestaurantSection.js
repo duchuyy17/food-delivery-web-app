@@ -395,7 +395,7 @@ const RestaurantSections = ({
           <View style={styles(currentTheme).section}>
             <View style={styles(currentTheme).sectionHeader}>
               <TextDefault H4 bolder textColor={currentTheme.fontMainColor}>
-                Popular
+                {t('popular')}
               </TextDefault>
             </View>
 
@@ -423,7 +423,7 @@ const RestaurantSections = ({
       ) : (
         <View style={styles(currentTheme).section}>
           <TextDefault H4 bolder textColor={currentTheme.fontMainColor} style={{ marginBottom: scale(15) }}>
-            Find what you want
+              {t('findWhatYouWant')}
           </TextDefault>
 
           <View style={styles(currentTheme).categoriesGrid}>

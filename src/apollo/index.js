@@ -21,59 +21,85 @@ import { calculateDistance } from '../utils/customFunctions'
 const setupApollo = () => {
   const { GRAPHQL_URL, WS_GRAPHQL_URL } = useEnvVars()
 
-  const cache = new InMemoryCache({
-    typePolicies: {
-      Query: {
-        fields: {
-          _id: {
-            keyArgs: ['string']
-          },
-          orders: offsetLimitPagination()
-        }
+ // Tạo random ổn định theo ID (hash)
+const stableRandom = (id, limit = 10) => {
+  let hash = 0;
+  for (let i = 0; i < id.length; i++) {
+    hash = (hash << 5) - hash + id.charCodeAt(i);
+  }
+  return Math.abs(hash % limit);
+};
+
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        orders: offsetLimitPagination(),
       },
-      Category: {
-        fields: {
-          foods: {
-            merge(_existing, incoming) {
-              return incoming
-            }
-          }
-        }
+    },
+
+    Category: {
+      fields: {
+        foods: {
+          merge(_existing, incoming) {
+            return incoming; // Foods không phân trang → luôn dùng dữ liệu mới
+          },
+        },
       },
-      Food: {
-        fields: {
-          variations: {
-            merge(_existing, incoming) {
-              return incoming
-            }
-          }
-        }
+    },
+
+    Food: {
+      fields: {
+        variations: {
+          merge(_existing, incoming) {
+            return incoming; // Tránh lặp variation
+          },
+        },
       },
-      RestaurantPreview: {
-        fields: {
-          distanceWithCurrentLocation: {
-            read(_existing, {variables, field, readField}) {
-              const restaurantLocation = readField('location')
-              const distance = calculateDistance(restaurantLocation?.coordinates[0], restaurantLocation?.coordinates[1], variables.latitude, variables.longitude)
-              return distance
-            }
+    },
+
+    RestaurantPreview: {
+      keyFields: ['_id'],  // Quan trọng để random ổn định
+      fields: {
+        /** 📌 1. Tính lại khoảng cách */
+        distanceWithCurrentLocation: {
+          read(_existing, { variables, readField }) {
+            const lat = variables?.latitude;
+            const lng = variables?.longitude;
+
+            if (lat == null || lng == null) return null;
+
+            const location = readField('location');
+            if (!location?.coordinates) return null;
+
+            return calculateDistance(
+              location.coordinates[0],
+              location.coordinates[1],
+              lat,
+              lng
+            );
           },
-          freeDelivery: {
-            read(_existing) {
-              const randomValue = Math.random() * 10;
-              return randomValue > 5
-            }
+        },
+
+        /** 📌 2. Free delivery random ổn định */
+        freeDelivery: {
+          read(_existing, { readField }) {
+            const id = readField('_id');
+            return stableRandom(id) > 5;
           },
-          acceptVouchers: {
-            read(_existing) {
-              const randomValue = Math.random() * 10;
-              return randomValue < 5
-            }
+        },
+
+        /** 📌 3. Accept voucher random ổn định */
+        acceptVouchers: {
+          read(_existing, { readField }) {
+            const id = readField('_id');
+            return stableRandom(id) < 5;
           },
-        }
-      }
-    }
-  })
+        },
+      },
+    },
+  },
+});
 
   const httpLink = createHttpLink({
     uri: GRAPHQL_URL

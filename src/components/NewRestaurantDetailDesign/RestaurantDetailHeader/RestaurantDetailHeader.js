@@ -105,7 +105,7 @@ function RestaurantDetailHeader({
         <View style={styles(currentTheme).deliveryDetailsOverlay}>
           <View style={styles(currentTheme).detailPill}>
             <TextDefault textColor={currentTheme.fontMainColor}>
-              {t('deliveryCharges')} {configuration.currencySymbol}
+            {t('deliveryCharges')} {configuration.currencySymbol}
               {configuration?.deliveryRate}
             </TextDefault>
           </View>
@@ -132,6 +132,7 @@ function RestaurantDetailHeader({
               }
               style={styles(currentTheme).restaurantImg}
             />
+            {console.log('restaurant name', restaurant)}
             <TextDefault
               numberOfLines={1}
               H3
@@ -172,7 +173,7 @@ function RestaurantDetailHeader({
               {restaurant?.reviewData?.ratings ?? '0'}
             </TextDefault>
             <TextDefault textColor={currentTheme.fontNewColor} bold H5>
-              ({restaurant?.reviewData?.total ?? '0'} {t('reviews')})
+              ({restaurant?.reviewData?.total ?? '0'} {t('Reviews')})
             </TextDefault>
           </View>
 

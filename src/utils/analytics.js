@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
 import useEnvVars from '../../environment'
-import * as amplitude from '@amplitude/analytics-react-native'
+// import * as amplitude from '@amplitude/analytics-react-native' // ❌ Tắt import luôn
 import { getTrackingPermissions } from './useAppTrackingTrasparency'
 
 const Analytics = () => {
   const { AMPLITUDE_API_KEY } = useEnvVars()
-  let isInitialized = false
   const apiKey = AMPLITUDE_API_KEY
 
+  // Danh sách event giữ lại để code khác không bị lỗi
   const events = {
     USER_LOGGED_IN: 'USER_LOGGED_IN',
     USER_CREATED_ACCOUNT: 'USER_CREATED_ACCOUNT',
@@ -15,7 +15,7 @@ const Analytics = () => {
     USER_RECONNECTED: 'USER_RECONNECTED',
     ADD_TO_CART: 'ADD_TO_CART',
     NAVIGATE_TO_CART: 'NAVIGATE_TO_CART',
-    OPENED_RESTAURANT_ITEM: 'OPENED_RESATURANT_ITEM',
+    OPENED_RESTAURANT_ITEM: 'OPENED_RESTAURANT_ITEM',
     NAVIGATE_TO_ORDER_DETAIL: 'NAVIGATE_TO_ORDER_DETAIL',
     ORDER_PLACED: 'ORDER_PLACED',
     NAVIGATE_TO_MAIN: 'NAVIGATE_TO_MAIN',
@@ -46,51 +46,17 @@ const Analytics = () => {
     NAVIGATE_TO_FAQS: 'NAVIGATE_TO_FAQS'
   }
 
+  // 🔇 Vô hiệu hóa hoàn toàn — không khởi tạo, không cookie
   const initialize = async () => {
-    try {
-      const trackingStatus = await getTrackingPermissions()
-      if (isInitialized || !apiKey /*  || trackingStatus !== 'granted' */) {
-        return
-      }
-      amplitude.init(apiKey)
-      isInitialized = true
-    } catch (error) {
-      console.log('Amplitude init error', error)
-    }
+    console.log('🔇 Amplitude disabled — no tracking, no cookies.')
   }
 
-  const identify = async (options, userId) => {
-    await initialize()
-    if (!isInitialized) return
-
-    const properties = options
-
-    if (!apiKey) return
-    if (userId) {
-      amplitude.setUserId(userId)
-    }
-    if (properties) {
-      amplitude.Identify(properties)
-    } else {
-      const identifyObj = new amplitude.Identify()
-      identifyObj.remove(properties)
-      amplitude.Identify(identifyObj)
-    }
+  const identify = async () => {
+    // Không làm gì cả
   }
 
-  const track = async (event, options) => {
-    await initialize()
-    if (!isInitialized) return
-
-    const properties = options
-
-    if (!apiKey) return
-
-    if (properties) {
-      await amplitude.track(event, properties)
-    } else {
-      await amplitude.track(event)
-    }
+  const track = async () => {
+    // Không làm gì cả
   }
 
   useEffect(() => {

@@ -487,6 +487,8 @@ export const vi = {
     placeOrder: 'Đặt hàng',
     continueAsGuest: 'Tiếp tục với tư cách khách',
     restaurantClosed: 'Nhà hàng hiện đang đóng cửa',
+    popular : 'Phổ biến',
+    findWhatYouWant: 'Tìm những gì bạn muốn',
     backToRestaurants: 'Quay lại nhà hàng',
     seeMenu: 'Xem thực đơn',
     askContactlessDelivery: 'Yêu cầu giao hàng không tiếp xúc',
@@ -570,7 +572,9 @@ export const vi = {
     restaurant: 'Nhà hàng',
     deliveryCost: 'Chi phí giao hàng',
     restrictionsInstructions: 'Nếu bạn có dị ứng hoặc hạn chế ăn kiêng khác, vui lòng liên hệ với nhà hàng. Nhà hàng sẽ cung cấp thông tin cụ thể về thực phẩm theo yêu cầu.',
+    restrictionsInstructionsGrocery: 'Nếu bạn cần thông tin chi tiết về sản phẩm, thành phần, hoặc hướng dẫn bảo quản, vui lòng liên hệ trực tiếp với cửa hàng để được hỗ trợ.',
     preservationText: 'Hương vị đích thực của tất cả các món ăn truyền thống được bảo tồn tại đây.',
+    preservationTextForGrocery:'Nơi bạn có thể tìm thấy tất cả các mặt hàng tạp hóa truyền thống dưới một mái nhà.',
     none: 'Không có',
     yourEmail: 'Đăng nhập dễ dàng bằng email của bạn!',
     yourEmailPassword: 'Bây giờ nhập mật khẩu của bạn để truy cập!',
@@ -656,4 +660,5 @@ export const vi = {
     "Applied Filters": 'Bộ lọc đã áp dụng',
     "WhatsApp is not installed on the device": "WhatsApp chưa được cài đặt trên thiết bị",
     "Install it": "Cài đặt"
+
   }

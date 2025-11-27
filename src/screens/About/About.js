@@ -143,7 +143,10 @@ function About(props) {
                 H5
                 bold
               >
-                {t('preservationText')}
+                {restaurantObject?.shopType === 'grocery'
+                  ? t('preservationTextForGrocery')
+                  : t('preservationText')
+                }
               </TextDefault>
             </View>
           </View>
@@ -187,19 +190,26 @@ function About(props) {
               {restaurantObject.openingTimes.map((v, index) => (
                 <View key={index} style={styles(currentTheme).timingRowMain}>
                   <TextDefault isRTL style={styles().timingText} textColor={currentTheme.fontThirdColor} bolder large>
-                    {t(v.day)}{' '}
+                    <MaterialIcons name="access-time" size={16} color={currentTheme.fontThirdColor} />
+                    {' '} {t(v.day)}{' '}
                   </TextDefault>
                   {v?.times?.length < 1 ? (
                     <TextDefault isRTL key={index + 8} small bold center>
                       {t('ClosedAllDay')}
                     </TextDefault>
                   ) : (
-                    v?.times?.map((t) => (
-                      <TextDefault isRTL key={index + 8} textColor={currentTheme.fontThirdColor} large>
-                        {t.startTime[0]}:{t.startTime[1]}
-                        {' - '}
-                        {t.endTime[0]}:{t.endTime[1]}
-                      </TextDefault>
+                   v?.times?.map((t, index) => (
+                      <View key={index} style={{ flexDirection: 'row', alignItems: 'left', marginBottom: 4 }}>
+                       
+                        <TextDefault
+                          isRTL
+                          textColor={currentTheme.fontThirdColor}
+                          large
+                          style={{ marginLeft: 6 }}
+                        >
+                          {t.startTime[0]}:{t.startTime[1]} - {t.endTime[0]}:{t.endTime[1]}
+                        </TextDefault>
+                      </View>
                     ))
                   )}
                 </View>
@@ -255,7 +265,11 @@ function About(props) {
                 H5
                 bold
               >
-                {t('restrictionsInstructions')}
+                {
+                  restaurantObject?.shopType === 'grocery'
+                    ? t('restrictionsInstructionsGrocery')
+                    : t('restrictionsInstructions')
+                }
               </TextDefault>
             </View>
 
